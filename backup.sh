@@ -1,14 +1,16 @@
-if [ "$1" == "" ]; then
+#! /bin/bash
+
+if [ "$1" = "" ]; then
     echo "Faltando IP de destino"
     exit 1
 fi
 
-if [ "$2" == "" ]; then
+if [ "$2" = "" ]; then
     echo "Faltando nome de usuario"
     exit 1
 fi
 
-if [ "$3" == "" ]; then
+if [ "$3" = "" ]; then
     echo "Faltando chave SSH"
     exit 1
 fi
@@ -18,7 +20,7 @@ if [ ! -f "$3" ]; then
     exit 1
 fi
 
-if [ "$4" == "" ]; then
+if [ "$4" = "" ]; then
     echo "Faltando pasta de destino"
     exit 1
 fi
@@ -53,10 +55,10 @@ setup() {
     echo "Setting up..."
     setup_backup
     
-    if [[ "$KIND" != "" ]]; then
-        if [[ "$KIND" == "postgres" ]]; then
+    if [ "$KIND" != "" ]; then
+        if [ "$KIND" = "postgres" ]; then
             backup_postgres
-        elif [[ "$KIND" == "trilium" ]]; then
+        elif [ "$KIND" = "trilium" ]; then
             backup_trilium
         else
             echo "Nothing to do"
