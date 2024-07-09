@@ -25,6 +25,7 @@ if [ "$4" = "" ]; then
     exit 1
 fi
 
+ROOT_DIR=$(dirname "$0")
 DEST_IP="$1"
 USER="$2"
 SSH_KEY="$3"
@@ -37,7 +38,7 @@ SCP_COMMAND="scp -i $SSH_KEY"
 SSH_COMMAND="ssh -i $SSH_KEY $USER@$DEST_IP"
 
 setup_backup() {
-    sh -c "$SCP_COMMAND remote.sh $USER@$DEST_IP:/home/$USER/remote.sh"
+    sh -c "$SCP_COMMAND $ROOT_DIR/remote.sh $USER@$DEST_IP:/home/$USER/remote.sh"
     sh -c "$SSH_COMMAND bash /home/$USER/remote.sh $KIND"
 }
 

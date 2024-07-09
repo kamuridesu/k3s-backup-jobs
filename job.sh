@@ -1,8 +1,10 @@
 #! /bin/bash
 
+ROOT_DIR=$(dirname "$0")
+
 set -a
-source .env
+source $ROOT_DIR/.env
 set +a
 
-sh backup.sh $CP_IP ubuntu ~/.ssh/aws ./backup postgres
-sh backup.sh $WORKER_IP ubuntu ~/.ssh/aws ./backup trilium
+sh $ROOT_DIR/backup.sh $CP_IP ubuntu ~/.ssh/aws $BACKUP_DIR postgres
+sh $ROOT_DIR/backup.sh $WORKER_IP ubuntu ~/.ssh/aws $BACKUP_DIR trilium
