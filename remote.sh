@@ -13,10 +13,18 @@ backup_postgres() {
     sudo docker exec -u postgres postgres-postgres_primary-1 pg_dumpall > $HOME/backup.sql
 }
 
+backup_k3s_db() {
+    echo "Creating k3s backup"
+    cd $HOME
+    sudo tar -czvf k3s.tar.gz /var/lib/rancher/k3s/server/db/
+    cd -
+}
+
 if [[ "$1" = "trilium" ]]; then
     backup_trilium
 elif [[ "$1" = "postgres" ]]; then
     backup_postgres
+    backup_k3s_db
 elif [[ "$1" = "" ]]; then
     backup_postgres
     backup_trilium

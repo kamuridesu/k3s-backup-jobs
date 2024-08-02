@@ -52,6 +52,11 @@ backup_postgres() {
     sh -c "$SCP_COMMAND $USER@$DEST_IP:/home/$USER/backup.sql $FOLDER/backup.sql"
 }
 
+backup_k3s() {
+    echo "Backing up k3s..."
+    sh -c "$SCP_COMMAND $USER@$DEST_IP:/home/$USER/k3s.tar.gz $FOLDER/k3s.tar.gz"
+}
+
 setup() {
     echo "Setting up..."
     setup_backup
@@ -59,6 +64,7 @@ setup() {
     if [ "$KIND" != "" ]; then
         if [ "$KIND" = "postgres" ]; then
             backup_postgres
+            backup_k3s
         elif [ "$KIND" = "trilium" ]; then
             backup_trilium
         else
