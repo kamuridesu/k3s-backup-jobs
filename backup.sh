@@ -37,6 +37,8 @@ mkdir -p $FOLDER
 SCP_COMMAND="scp -i $SSH_KEY"
 SSH_COMMAND="ssh -i $SSH_KEY $USER@$DEST_IP"
 
+echo "Backing up $DEST_IP"
+
 setup_backup() {
     sh -c "$SCP_COMMAND $ROOT_DIR/remote.sh $USER@$DEST_IP:/home/$USER/remote.sh"
     sh -c "$SSH_COMMAND bash /home/$USER/remote.sh $KIND"
@@ -60,8 +62,9 @@ backup_k3s() {
 setup() {
     echo "Setting up..."
     setup_backup
-    
-    if [ "$KIND" != "" ]; then
+   
+    echo "Backing up kind $KIND"
+    if [ ! -z "$KIND" ]; then
         if [ "$KIND" = "postgres" ]; then
             backup_postgres
             backup_k3s

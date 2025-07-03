@@ -19,4 +19,4 @@ if [ -f "$FOLDER/k3s.tar.gz" ]; then
 fi
 
 sh $ROOT_DIR/backup.sh $CP_IP ubuntu ~/.ssh/aws $BACKUP_DIR postgres
-sh $ROOT_DIR/backup.sh $WORKER_IP ubuntu ~/.ssh/aws $BACKUP_DIR trilium
+sh $ROOT_DIR/backup.sh $CP_IP ubuntu ~/.ssh/aws $BACKUP_DIR trilium
